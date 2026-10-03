@@ -106,19 +106,87 @@ lightbox.addEventListener("click",e=>{if(e.target===lightbox)closeLightbox()});
 
 document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeLightbox();closeVideoModal()}});
 
-const musicSearch=document.getElementById("musicSearch");
-const musicCards=[...document.querySelectorAll(".music-card")];
-const musicEmpty=document.getElementById("musicEmpty");
-if(musicSearch){
-  musicSearch.addEventListener("input",()=>{
-    const q=musicSearch.value.trim().toLowerCase();
-    let visible=0;
-    musicCards.forEach(card=>{
-      const text=`${card.dataset.title||""} ${card.dataset.tags||""} ${card.innerText}`.toLowerCase();
-      const show=!q || text.includes(q);
-      card.style.display=show ? "block" : "none";
-      if(show) visible++;
+
+
+
+// =========================
+// PESQUISA DE MÚSICAS
+// =========================
+
+const musicSearch = document.getElementById("musicSearch");
+const musicCards = document.querySelectorAll(".music-card");
+const musicEmpty = document.getElementById("musicEmpty");
+
+if (musicSearch) {
+
+  musicSearch.addEventListener("input", function () {
+
+    const search = this.value
+      .toLowerCase()
+      .trim();
+
+    let found = 0;
+
+    musicCards.forEach(card => {
+
+      const title =
+        (card.dataset.title || "").toLowerCase();
+
+      const tags =
+        (card.dataset.tags || "").toLowerCase();
+
+      const text =
+        card.innerText.toLowerCase();
+
+      const match =
+        title.includes(search) ||
+        tags.includes(search) ||
+        text.includes(search);
+
+      if (match) {
+
+        card.style.display = "";
+
+        found++;
+
+      } else {
+
+        card.style.display = "none";
+
+      }
+
     });
-    musicEmpty.style.display=visible ? "none" : "block";
+
+
+    if (found === 0 && search !== "") {
+
+      musicEmpty.style.display = "block";
+
+    } else {
+
+      musicEmpty.style.display = "none";
+
+    }
+
   });
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

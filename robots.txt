@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://marcelodeflavio.github.io/Portifolio/sitemap.xml

@@ -1,0 +1,23 @@
+{
+  "name": "Marcelo de Flávio — Portfólio",
+  "short_name": "Marcelo de Flávio",
+  "description": "Portfólio pessoal de Marcelo de Flávio — tecnologia, liderança juvenil e defesa dos direitos das crianças.",
+  "lang": "pt-MZ",
+  "start_url": "/Portifolio/",
+  "scope": "/Portifolio/",
+  "display": "standalone",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "icons": [
+    {
+      "src": "Perfil P.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "Perfil P.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

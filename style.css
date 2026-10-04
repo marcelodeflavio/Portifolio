@@ -436,6 +436,8 @@ button{font:inherit}
 
 
 
+
+
 /* =====================================================
    HOVER — SKILLS
 ===================================================== */
@@ -632,4 +634,182 @@ button{font:inherit}
     transform: translateY(-5px);
   }
 
+}
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   FUTURE CARD — HOVER
+========================= */
+
+.future-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition:
+    transform 0.45s ease,
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+
+/* brilho colorido */
+.future-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(255, 35, 70, 0.85),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 30%,
+      rgba(30, 100, 255, 0.85),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(255, 190, 30, 0.75),
+      transparent 40%
+    );
+
+  opacity: 0;
+  filter: blur(35px);
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.6s ease;
+}
+
+/* camada interna */
+.future-card::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 35, 70, 0.08),
+    rgba(30, 100, 255, 0.08),
+    rgba(255, 190, 30, 0.08)
+  );
+
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+
+/* =========================
+   HOVER
+========================= */
+
+.future-card:hover {
+  transform: translateY(-8px) scale(1.01);
+
+  border-color: rgba(255, 190, 30, 0.75);
+
+  box-shadow:
+    0 0 20px rgba(255, 35, 70, 0.25),
+    0 0 45px rgba(30, 100, 255, 0.22),
+    0 0 75px rgba(255, 190, 30, 0.15);
+}
+
+.future-card:hover::before {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+.future-card:hover::after {
+  opacity: 1;
+}
+
+
+/* =========================
+   NÚMERO 08
+========================= */
+
+.future-card .future-number {
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.future-card:hover .future-number {
+  color: #ffd43b;
+
+  text-shadow:
+    0 0 8px rgba(255, 35, 70, 0.8),
+    0 0 18px rgba(30, 100, 255, 0.8),
+    0 0 28px rgba(255, 190, 30, 0.7);
+}
+
+
+/* =========================
+   TÍTULO
+========================= */
+
+.future-card h2 {
+  transition:
+    color 0.4s ease,
+    text-shadow 0.4s ease;
+}
+
+.future-card:hover h2 {
+  color: #ffffff;
+
+  text-shadow:
+    0 0 12px rgba(30, 100, 255, 0.8),
+    0 0 22px rgba(255, 35, 70, 0.45);
+}
+
+
+/* =========================
+   KICKER
+========================= */
+
+.future-card .kicker {
+  transition:
+    color 0.4s ease,
+    letter-spacing 0.4s ease;
+}
+
+.future-card:hover .kicker {
+  color: #ffd43b;
+  letter-spacing: 0.12em;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.future-list span {
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.future-list span:hover {
+  transform: translateY(-3px);
+
+  color: #ffffff;
+
+  border-color: rgba(255, 190, 30, 0.8);
+
+  box-shadow:
+    0 0 12px rgba(255, 35, 70, 0.35),
+    0 0 18px rgba(30, 100, 255, 0.25);
 }

@@ -1343,6 +1343,19 @@ body.dark .contact-item {
   box-shadow:
     0 12px 35px rgba(37,211,102,.30);
 
+
+
+
+  .contact-profile,
+.contact-content {
+  transition:
+    transform .7s cubic-bezier(.2,.8,.2,1),
+    opacity .7s ease;
+}
+
+.contact-profile:hover {
+  transform: translateY(-4px);
+}
   transition:
     transform .35s ease,
     box-shadow .35s ease;

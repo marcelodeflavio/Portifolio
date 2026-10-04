@@ -1,6 +1,8 @@
 /* =========================================================
    MARCELO DE FLÁVIO — PORTFÓLIO
    JavaScript principal
+   TikTok removido
+   Áudio/Música mantido
    ========================================================= */
 
 "use strict";
@@ -47,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
 
     });
+
 
     document.querySelectorAll(".nav a").forEach(link => {
 
@@ -209,7 +212,9 @@ document.addEventListener("DOMContentLoaded", () => {
       translations[language] || translations.pt;
 
     html.lang =
-      language === "en" ? "en" : "pt-MZ";
+      language === "en"
+        ? "en"
+        : "pt-MZ";
 
     document
       .querySelectorAll("[data-i18n]")
@@ -221,18 +226,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (
           dictionary[key] !== undefined
         ) {
+
           element.textContent =
             dictionary[key];
+
         }
 
       });
 
+
     if (langBtn) {
 
       langBtn.textContent =
-        language === "en" ? "PT" : "EN";
+        language === "en"
+          ? "PT"
+          : "EN";
 
     }
+
 
     localStorage.setItem(
       "marcelo-language",
@@ -258,6 +269,8 @@ document.addEventListener("DOMContentLoaded", () => {
           : "pt";
 
       applyLanguage(currentLanguage);
+
+      updateClock();
 
     });
 
@@ -288,9 +301,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 
+
   updateClock();
 
-  setInterval(updateClock, 1000);
+  setInterval(
+    updateClock,
+    1000
+  );
 
 
   /* =======================================================
@@ -298,8 +315,10 @@ document.addEventListener("DOMContentLoaded", () => {
      ======================================================= */
 
   if (year) {
+
     year.textContent =
       new Date().getFullYear();
+
   }
 
 
@@ -310,9 +329,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealElements =
     document.querySelectorAll(".reveal");
 
-  if (
-    "IntersectionObserver" in window
-  ) {
+
+  if ("IntersectionObserver" in window) {
 
     const observer =
       new IntersectionObserver(
@@ -341,6 +359,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       );
 
+
     revealElements.forEach(element => {
       observer.observe(element);
     });
@@ -359,6 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ======================================================= */
 
   let scrolling = false;
+
 
   function updateProgress() {
 
@@ -383,7 +403,10 @@ document.addEventListener("DOMContentLoaded", () => {
         : 0;
 
     progress.style.width =
-      `${Math.min(100, Math.max(0, percentage))}%`;
+      `${Math.min(
+        100,
+        Math.max(0, percentage)
+      )}%`;
 
     scrolling = false;
 
@@ -408,6 +431,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { passive: true }
   );
 
+
   updateProgress();
 
 
@@ -428,13 +452,18 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".gallery-item");
 
 
-  function openLightbox(src, alt = "") {
+  function openLightbox(
+    src,
+    alt = ""
+  ) {
 
     if (
       !lightbox ||
       !lightboxImage ||
       !src
-    ) return;
+    ) {
+      return;
+    }
 
     lightboxImage.src = src;
     lightboxImage.alt = alt;
@@ -455,7 +484,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!lightbox) return;
 
-    lightbox.classList.remove("open");
+    lightbox.classList.remove(
+      "open"
+    );
 
     lightbox.setAttribute(
       "aria-hidden",
@@ -473,32 +504,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   galleryItems.forEach(item => {
 
-    item.addEventListener("click", () => {
+    item.addEventListener(
+      "click",
+      () => {
 
-      const image =
-        item.querySelector("img");
+        const image =
+          item.querySelector("img");
 
-      const src =
-        item.dataset.image ||
-        image?.currentSrc ||
-        image?.src;
+        const src =
+          item.dataset.image ||
+          image?.currentSrc ||
+          image?.src;
 
-      const alt =
-        image?.alt ||
-        "Imagem da galeria de Marcelo de Flávio";
+        const alt =
+          image?.alt ||
+          "Imagem da galeria de Marcelo de Flávio";
 
-      openLightbox(src, alt);
+        openLightbox(
+          src,
+          alt
+        );
 
-    });
+      }
+    );
 
   });
 
 
   if (lightboxClose) {
+
     lightboxClose.addEventListener(
       "click",
       closeLightbox
     );
+
   }
 
 
@@ -511,7 +550,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (
           event.target === lightbox
         ) {
+
           closeLightbox();
+
         }
 
       }
@@ -521,7 +562,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     MODAL DE VÍDEO
+     MODAL DE VÍDEO — YOUTUBE
+     
+     IMPORTANTE:
+     TikTok NÃO é utilizado aqui.
+     Este sistema funciona apenas para os vídeos
+     que possuem o atributo data-video.
      ======================================================= */
 
   const videoModal =
@@ -545,8 +591,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let videoId = "";
 
+
       if (
-        parsed.hostname.includes("youtu.be")
+        parsed.hostname.includes(
+          "youtu.be"
+        )
       ) {
 
         videoId =
@@ -556,8 +605,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       }
 
+
       else if (
-        parsed.pathname.includes("/embed/")
+        parsed.pathname.includes(
+          "/embed/"
+        )
       ) {
 
         videoId =
@@ -566,6 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .split("/")[0];
 
       }
+
 
       else {
 
@@ -583,6 +636,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const params =
         new URLSearchParams();
 
+
       parsed.searchParams.forEach(
         (value, key) => {
 
@@ -590,15 +644,28 @@ document.addEventListener("DOMContentLoaded", () => {
             key !== "v" &&
             key !== "si"
           ) {
-            params.set(key, value);
+
+            params.set(
+              key,
+              value
+            );
+
           }
 
         }
       );
 
 
-      params.set("autoplay", "1");
-      params.set("rel", "0");
+      params.set(
+        "autoplay",
+        "1"
+      );
+
+      params.set(
+        "rel",
+        "0"
+      );
+
 
       return (
         "https://www.youtube.com/embed/" +
@@ -629,11 +696,16 @@ document.addEventListener("DOMContentLoaded", () => {
       !videoModal ||
       !videoFrame ||
       !url
-    ) return;
+    ) {
+      return;
+    }
 
 
     const iframe =
-      document.createElement("iframe");
+      document.createElement(
+        "iframe"
+      );
+
 
     iframe.src =
       youtubeEmbed(url);
@@ -644,9 +716,12 @@ document.addEventListener("DOMContentLoaded", () => {
     iframe.allow =
       "autoplay; encrypted-media; picture-in-picture; fullscreen";
 
-    iframe.allowFullscreen = true;
+    iframe.allowFullscreen =
+      true;
 
-    iframe.loading = "eager";
+    iframe.loading =
+      "eager";
+
 
     videoFrame.innerHTML = "";
 
@@ -655,14 +730,17 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-    videoModal.classList.add("open");
+    videoModal.classList.add(
+      "open"
+    );
 
     videoModal.setAttribute(
       "aria-hidden",
       "false"
     );
 
-    body.style.overflow = "hidden";
+    body.style.overflow =
+      "hidden";
 
   }
 
@@ -680,6 +758,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "true"
     );
 
+
     if (videoFrame) {
       videoFrame.innerHTML = "";
     }
@@ -689,8 +768,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  /*
+     Apenas elementos com data-video
+     serão tratados como vídeos.
+
+     TikTok não é processado.
+  */
+
   document
-    .querySelectorAll("[data-video]")
+    .querySelectorAll(
+      "[data-video]"
+    )
     .forEach(element => {
 
       element.addEventListener(
@@ -705,8 +793,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
           }
 
+
           const url =
             element.dataset.video;
+
 
           if (url) {
             openVideo(url);
@@ -735,9 +825,12 @@ document.addEventListener("DOMContentLoaded", () => {
       event => {
 
         if (
-          event.target === videoModal
+          event.target ===
+          videoModal
         ) {
+
           closeVideo();
+
         }
 
       }
@@ -747,14 +840,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
-     PESQUISA DE MÚSICAS
+     PESQUISA DE MÚSICAS / ÁUDIO
+     
+     Esta parte permanece ativa.
      ======================================================= */
 
   const musicSearch =
-    document.getElementById("musicSearch");
+    document.getElementById(
+      "musicSearch"
+    );
 
   const musicEmpty =
-    document.getElementById("musicEmpty");
+    document.getElementById(
+      "musicEmpty"
+    );
 
   const musicCards =
     document.querySelectorAll(
@@ -776,38 +875,43 @@ document.addEventListener("DOMContentLoaded", () => {
         let found = 0;
 
 
-        musicCards.forEach(card => {
+        musicCards.forEach(
+          card => {
 
-          const title =
-            (
-              card.dataset.title || ""
-            ).toLowerCase();
+            const title =
+              (
+                card.dataset.title ||
+                ""
+              ).toLowerCase();
 
-          const tags =
-            (
-              card.dataset.tags || ""
-            ).toLowerCase();
+            const tags =
+              (
+                card.dataset.tags ||
+                ""
+              ).toLowerCase();
 
-          const text =
-            card.innerText
-              .toLowerCase();
-
-
-          const match =
-            search === "" ||
-            title.includes(search) ||
-            tags.includes(search) ||
-            text.includes(search);
+            const text =
+              card.innerText
+                .toLowerCase();
 
 
-          card.hidden = !match;
+            const match =
+              search === "" ||
+              title.includes(search) ||
+              tags.includes(search) ||
+              text.includes(search);
 
 
-          if (match) {
-            found++;
+            card.hidden =
+              !match;
+
+
+            if (match) {
+              found++;
+            }
+
           }
-
-        });
+        );
 
 
         if (musicEmpty) {
@@ -827,6 +931,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =======================================================
+     ÁUDIO LOCAL
+     
+     Garante que os elementos <audio>
+     continuam funcionando normalmente.
+     ======================================================= */
+
+  document
+    .querySelectorAll("audio")
+    .forEach(audio => {
+
+      audio.setAttribute(
+        "preload",
+        audio.getAttribute(
+          "preload"
+        ) || "metadata"
+      );
+
+    });
+
+
+  /* =======================================================
      FECHAR MODAIS COM ESC
      ======================================================= */
 
@@ -834,7 +959,9 @@ document.addEventListener("DOMContentLoaded", () => {
     "keydown",
     event => {
 
-      if (event.key === "Escape") {
+      if (
+        event.key === "Escape"
+      ) {
 
         closeLightbox();
         closeVideo();
@@ -842,11 +969,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
 
-      /* Galeria — imagem anterior/próxima */
+      /* =====================================================
+         GALERIA — IMAGEM ANTERIOR / PRÓXIMA
+         ===================================================== */
 
       if (
         lightbox &&
-        lightbox.classList.contains("open") &&
+        lightbox.classList.contains(
+          "open"
+        ) &&
         (
           event.key === "ArrowLeft" ||
           event.key === "ArrowRight"
@@ -854,30 +985,39 @@ document.addEventListener("DOMContentLoaded", () => {
       ) {
 
         const items =
-          Array.from(galleryItems);
+          Array.from(
+            galleryItems
+          );
 
-        if (!items.length) return;
+
+        if (!items.length) {
+          return;
+        }
 
 
         const currentSrc =
           lightboxImage?.src;
 
+
         let currentIndex =
-          items.findIndex(item => {
+          items.findIndex(
+            item => {
 
-            const image =
-              item.querySelector("img");
+              const image =
+                item.querySelector(
+                  "img"
+                );
 
-            const src =
-              item.dataset.image ||
-              image?.currentSrc ||
-              image?.src;
+              const src =
+                item.dataset.image ||
+                image?.currentSrc ||
+                image?.src;
 
-            return (
-              src === currentSrc
-            );
 
-          });
+              return src === currentSrc;
+
+            }
+          );
 
 
         if (currentIndex < 0) {
@@ -885,10 +1025,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        if (event.key === "ArrowRight") {
+        if (
+          event.key === "ArrowRight"
+        ) {
 
           currentIndex =
-            (currentIndex + 1) %
+            (
+              currentIndex + 1
+            ) %
             items.length;
 
         }
@@ -910,15 +1054,21 @@ document.addEventListener("DOMContentLoaded", () => {
           items[currentIndex];
 
         const nextImage =
-          nextItem.querySelector("img");
+          nextItem.querySelector(
+            "img"
+          );
+
 
         const nextSrc =
           nextItem.dataset.image ||
           nextImage?.currentSrc ||
           nextImage?.src;
 
+
         const nextAlt =
-          nextImage?.alt || "";
+          nextImage?.alt ||
+          "";
+
 
         openLightbox(
           nextSrc,
@@ -942,19 +1092,35 @@ document.addEventListener("DOMContentLoaded", () => {
       if (
         !nav ||
         !menuBtn
-      ) return;
+      ) {
+        return;
+      }
+
 
       if (
-        nav.classList.contains("open") &&
-        !nav.contains(event.target) &&
-        !menuBtn.contains(event.target)
+        nav.classList.contains(
+          "open"
+        ) &&
+        !nav.contains(
+          event.target
+        ) &&
+        !menuBtn.contains(
+          event.target
+        )
       ) {
 
-        nav.classList.remove("open");
+        nav.classList.remove(
+          "open"
+        );
 
         menuBtn.setAttribute(
           "aria-expanded",
           "false"
+        );
+
+        menuBtn.setAttribute(
+          "aria-label",
+          "Abrir menu"
         );
 
       }
@@ -965,14 +1131,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* =======================================================
      LAZY LOADING DE IFRAMES
+     
+     Não adiciona nem processa TikTok.
      ======================================================= */
 
   document
-    .querySelectorAll("iframe")
+    .querySelectorAll(
+      "iframe"
+    )
     .forEach(iframe => {
 
       if (
-        !iframe.hasAttribute("loading")
+        !iframe.hasAttribute(
+          "loading"
+        )
       ) {
 
         iframe.setAttribute(
@@ -981,6 +1153,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
       }
+
 
       iframe.setAttribute(
         "referrerpolicy",
@@ -1005,7 +1178,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
       const isHeroImage =
-        image.closest(".hero") ||
+        image.closest(
+          ".hero"
+        ) ||
         image.classList.contains(
           "brand-photo"
         );
@@ -1043,6 +1218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const currentHost =
         window.location.hostname;
+
 
       try {
 
@@ -1099,7 +1275,10 @@ document.addEventListener("DOMContentLoaded", () => {
         event => {
 
           const targetID =
-            link.getAttribute("href");
+            link.getAttribute(
+              "href"
+            );
+
 
           if (
             !targetID ||
@@ -1109,10 +1288,22 @@ document.addEventListener("DOMContentLoaded", () => {
           }
 
 
-          const target =
-            document.querySelector(
-              targetID
-            );
+          let target;
+
+          try {
+
+            target =
+              document.querySelector(
+                targetID
+              );
+
+          }
+
+          catch (error) {
+
+            return;
+
+          }
 
 
           if (!target) {
@@ -1130,7 +1321,9 @@ document.addEventListener("DOMContentLoaded", () => {
               ).matches
                 ? "auto"
                 : "smooth",
-            block: "start"
+
+            block:
+              "start"
           });
 
         }
@@ -1190,25 +1383,63 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 
-  whatsappLinks.forEach(link => {
+  whatsappLinks.forEach(
+    link => {
 
-    link.addEventListener(
-      "click",
-      () => {
+      link.addEventListener(
+        "click",
+        () => {
 
-        /*
-          O número deve estar configurado
-          diretamente no href do HTML.
+          /*
+            O número deve estar configurado
+            diretamente no href do HTML.
 
-          Exemplo:
+            Exemplo:
 
-          https://wa.me/258XXXXXXXXX
-        */
+            https://wa.me/258XXXXXXXXX
+          */
 
-      }
-    );
+        }
+      );
 
-  });
+    }
+  );
+
+
+  /* =======================================================
+     GARANTIA: NENHUM EMBED DO TIKTOK
+     
+     Se ainda existir algum elemento TikTok
+     no HTML, ele será removido automaticamente.
+     ======================================================= */
+
+  document
+    .querySelectorAll(
+      ".tiktok-embed, blockquote.tiktok-embed"
+    )
+    .forEach(element => {
+
+      element.remove();
+
+    });
+
+
+  /* =======================================================
+     GARANTIA: REMOVER SCRIPT DO TIKTOK
+     
+     Caso o script TikTok ainda esteja no HTML,
+     ele não será executado.
+     ======================================================= */
+
+  document
+    .querySelectorAll(
+      'script[src*="tiktok.com/embed"]'
+    )
+    .forEach(script => {
+
+      script.remove();
+
+    });
 
 
   /* =======================================================

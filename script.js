@@ -1260,6 +1260,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+   
+document.querySelectorAll(".filtro").forEach((botao) => {
+  botao.addEventListener("click", () => {
+    const categoria = botao.dataset.filtro;
+
+    document.querySelectorAll(".filtro").forEach((item) => {
+      item.classList.toggle("ativo", item === botao);
+    });
+
+    document.querySelectorAll(".livro-card").forEach((livro) => {
+      const mostrar =
+        categoria === "todos" ||
+        livro.dataset.categoria === categoria;
+
+      livro.hidden = !mostrar;
+    });
+  });
+});
+
+
   /* =======================================================
      SCROLL SUAVE
      ======================================================= */
